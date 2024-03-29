@@ -11,7 +11,7 @@ export class LoginUsuarioDTO{
     })
 
     @IsEmail(undefined,{message:"O email cadastrado é inválido"})
-    email: string;
+    EMAIL: string;
 
     // Senha
  // ====================================== //// ====================================== //// ====================================== //
@@ -21,5 +21,5 @@ export class LoginUsuarioDTO{
     })
     
     @MinLength(8,{message: "Senha é inválida ou Incorreta!"})
-    senha: string; 
+    SENHA: string; 
 }

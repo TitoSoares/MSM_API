@@ -1,3 +1,5 @@
+import { Column, PrimaryColumn } from "typeorm"
+
 export class Entrada_SaidaEntity{
     id:string
     tipo:boolean
@@ -13,3 +15,21 @@ export class Entrada_SaidaEntity{
     this.idusuario=idusuario
     }
 }
+
+// @Entity()
+// export class ENTRADA_SERIE{
+
+//     @PrimaryColumn()    
+//     ID:string;
+
+//     @Column({length: 255})
+//     TIPO: boolean;
+
+//     @Column({length: 255})
+//     VALOR: number;    
+
+//     @ManyToOne(() => USUARIO, usuario => usuario.entrada_saida)
+//     @JoinColumn({ name: 'IDUSUARIO', referencedColumnName:'ID'})
+//     IDUSUARIO: USUARIO;
+    
+// }

@@ -15,7 +15,7 @@ export class AlteraUsuarioDTO{
         example:"Victor Augusto Farias Ferreira",
         description:"O nome é usado para identificar o usuário"
     })
-    nome:string
+    NOME:string
 
 
     // email
@@ -28,7 +28,7 @@ export class AlteraUsuarioDTO{
         example:"vitor.iac20166@gmail.com",
         description:"O email é usado para fazer o Login e identificação"
     })
-    email:string
+    EMAIL:string
  
 
     // CPF
@@ -40,7 +40,7 @@ export class AlteraUsuarioDTO{
         example:"999.999.999.99",
         description:"O Cpf é usado para identificar se o usuário como válido"
     })
-    cpf:string
+    CPF:string
 
     // CNPJ
  // ====================================== //// ====================================== //// ====================================== //
@@ -51,7 +51,7 @@ export class AlteraUsuarioDTO{
         example:"99.999.999/9999-99",
         description:"O Cnpj é usado para idenficar se o Cnpj cadastradado é válido"
     })
-    cnpj:string
+    CNPJ:string
 
 
     // senha
@@ -64,6 +64,6 @@ export class AlteraUsuarioDTO{
         description:"A senha deve ser uma senha forte, com esse tipo de formatação"
     })
     @SenhaForte({message:"Senha muito fraca"})
-    senha:string
+    SENHA:string
  // ====================================== //// ====================================== //// ====================================== //
 }   

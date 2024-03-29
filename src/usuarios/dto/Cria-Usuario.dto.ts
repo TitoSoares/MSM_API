@@ -17,7 +17,7 @@ export class CriaUsuariosDTO{
         //=====//
         @IsString()
         @IsNotEmpty({message:"O nome do usuário não pode ser vazio"})
-        nome:string
+        NOME:string
 
     // EMAIL
  // ====================================== //// ====================================== //// ====================================== //
@@ -28,7 +28,7 @@ export class CriaUsuariosDTO{
         //=====//
         @IsEmail(undefined,{message:"O e-mail é inválido, tente novamente"})
         @EmailUnico({message:"Já existe esse e-mail cadastrado"})
-        email:string
+        EMAIL:string
 
     // CPF
  // ====================================== //// ====================================== //// ====================================== //
@@ -38,7 +38,7 @@ export class CriaUsuariosDTO{
         })
         //=====//
         @IsString()
-        cpf:string
+        CPF:string
 
     // CNPJ
  // ====================================== //// ====================================== //// ====================================== //
@@ -48,7 +48,7 @@ export class CriaUsuariosDTO{
         })
         //=====//
         @IsString()
-        cnpj:string
+        CNPJ:string
 
     // SENHA
  // ====================================== //// ====================================== //// ====================================== //
@@ -59,7 +59,7 @@ export class CriaUsuariosDTO{
         //=====//
         @MinLength(8,{message:"Senha inválida, tente novamente"})
         @SenhaForte({message:"Senha muito fraca"})
-        senha:string
+        SENHA:string
 
  // ====================================== //// ====================================== //// ====================================== //    
 }

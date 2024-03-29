@@ -1,33 +1,36 @@
 import * as bcrypt from 'bcrypt'
+import { Column, PrimaryColumn } from 'typeorm'
 
 
-export class UsuariosEntity{
-    
-    // 1° etapa - cria
-    id:string
-    nome:string
-    email:string
-    cpf:string
-    cnpj:string
-    senha:string
+export class USUARIO{
 
-    // 2° etapa - criptografa
-    trocaSenha(senha){
+    @PrimaryColumn()
+    ID:string;
+
+    @Column({length: 255})
+    NOME: string;
+
+    @Column({length: 255})
+    EMAIL: string;
+
+    @Column({length: 255})
+    CPF: string;
+
+    @Column({length: 255})
+    CNPJ: string;
+
+    trocaSenha(SENHA){
         const saltOrRounds=10
-        this.senha=bcrypt.hashSync(senha,saltOrRounds)
+        this.SENHA=bcrypt.hashSync(SENHA,saltOrRounds)
     }
-    login(senha){
-        return bcrypt.compareSync(senha,this.senha)
+    login(SENHA){
+        return bcrypt.compareSync(SENHA,this.SENHA)
     }
 
-    // 2° etapa - constroe
-    constructor(id:string,nome:string,email:string,cpf:string,cnpj:string,senha:string){
-    const saltOrRounds=10
-    this.id=id;
-    this.nome=nome;
-    this.email=email
-    this.cpf=cpf
-    this.cnpj=cnpj
-    this.senha=bcrypt.hashSync(senha, saltOrRounds)
-    }
+    @Column({length: 255})
+    SENHA: string;
+
+    // @OneToMany(() => ENTRADA_SAIDA, entrada => entrada.usuario)
+    // filmes: FILME[];
+
 }
