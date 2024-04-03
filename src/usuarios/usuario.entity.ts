@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcrypt'
-import { Column, PrimaryColumn } from 'typeorm'
+import { Column, Entity, PrimaryColumn } from 'typeorm'
 
-
+@Entity()
 export class USUARIO{
 
     @PrimaryColumn()

@@ -1,17 +1,18 @@
 import { Injectable } from "@nestjs/common";
 import { registerDecorator, ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from "class-validator";
 import { register } from "module";
-import { UsuariosArmazenados } from "../usuarios.dm";
+import { UsuarioService } from "../usuario.service";
+
 
 @Injectable()
 @ValidatorConstraint({async:true})
 
 export class EmailUnicoValidator implements ValidatorConstraintInterface{
-    constructor(private clsUsuariosArmazenados:UsuariosArmazenados){
+    constructor(private clsUsuariosArmazenados:UsuarioService){
 
     }
     async validate(value:any,validationArguments?:ValidationArguments):Promise<boolean>{
-        const validarEmail=await this.clsUsuariosArmazenados.ValidaEmail(value)
+        const validarEmail=await this.clsUsuariosArmazenados.validaEmail(value)
         return !validarEmail
     }
 }

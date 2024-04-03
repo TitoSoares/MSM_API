@@ -24,13 +24,13 @@ export class UsuarioService {
             usuario.EMAIL = dados.EMAIL
             usuario.CPF = dados.CPF
             usuario.CNPJ = dados.CNPJ
-            usuario.SENHA = dados.SENHA
+            usuario.trocaSenha(dados.SENHA)
 
         return this.usuarioRepository.save(usuario)
         .then((result) => {
         return <RetornoCadastroDTO>{
             id: usuario.ID,
-            message: "Genero cadastrado!"
+            message: "Usuario cadastrado!"
         };
         })
         .catch((error) => {
@@ -60,6 +60,15 @@ export class UsuarioService {
           });
     }
 
+    async validaEmail(EMAIL: string) {
+        const possivelUsuario = await this.usuarioRepository.findOne({
+            where: {
+                EMAIL,
+            },
+        });
+        return (possivelUsuario !== null);
+    }
+
 // ====================================== //// ====================================== //// ====================================== //
 
     async alterar(id: string, dados: AlteraUsuarioDTO): Promise<RetornoCadastroDTO> {
@@ -68,6 +77,10 @@ export class UsuarioService {
         Object.entries(dados).forEach(
         ([chave, valor]) => {
             if(chave=== 'id'){
+                return;
+            }
+            if(chave=== 'SENHA'){
+                usuario.trocaSenha(chave)
                 return;
             }
 
@@ -117,13 +130,13 @@ export class UsuarioService {
         const usuario = await this.localizarporEmail(EMAIL);
     
         var ObjRetorno;
-        if (usuario)
+        if (usuario) {
             ObjRetorno = [usuario, usuario.login(SENHA)];
         }
         
         return <RetornoObjDTO>{
-            message: objRetorno[1] ? "Login efetuado" : "Usuario ou senha inválidos",
-            return: objRetorno[1] ? objRetorno[0] : null
+            message: ObjRetorno[1] ? "Login efetuado" : "Usuario ou senha inválidos",
+            return: ObjRetorno[1] ? ObjRetorno[0] : null
         }
    
     }

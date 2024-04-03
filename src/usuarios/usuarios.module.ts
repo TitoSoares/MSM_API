@@ -1,7 +1,8 @@
 import { Module } from "@nestjs/common";
 import { DatabaseModule } from "src/database/database.module";
+import { UsuarioProviders } from "./usuario.providers";
+import { UsuarioService } from "./usuario.service";
 import { UsuariosController } from "./usuarios.controller";
-import { UsuariosArmazenados } from "./usuarios.dm";
 import { EmailUnicoValidator } from "./validacao/email-unico.validator";
 
 
@@ -9,8 +10,8 @@ import { EmailUnicoValidator } from "./validacao/email-unico.validator";
 
         imports: [DatabaseModule],
         controllers:[UsuariosController],
-        providers:[    ...usuarioProviders,
-            UsuarioService,, EmailUnicoValidator]
+        providers:[    ...UsuarioProviders,
+            UsuarioService, EmailUnicoValidator]
 
     })
     

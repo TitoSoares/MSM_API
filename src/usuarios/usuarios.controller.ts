@@ -1,9 +1,9 @@
 import { Controller, Get, Post } from "@nestjs/common";
 import { Body, Delete, Param, Put } from "@nestjs/common";
 import { CriaUsuariosDTO } from "./dto/Cria-Usuario.dto";
-import { UsuariosEntity } from "./usuario.entity";
+import { USUARIO } from "./usuario.entity";
 import {v4  as uuid} from 'uuid'
-import { UsuariosArmazenados } from "./usuarios.dm";
+
 import { AlteraUsuarioDTO } from "./dto/Atualiza-Usuario.dto";
 import { LoginUsuarioDTO } from "./dto/Login-Usuario.dto";
 import { ApiResponse, ApiResponseProperty, ApiTags } from "@nestjs/swagger";
@@ -47,7 +47,7 @@ export class UsuariosController{
         @ApiResponse({status:200, description:"A operação foi um sucesso"})
         @ApiResponse({status:500, description:"Ocorreu um erro na operação! Tente novamente mais tarde"})
         
-        @Delete('remove-:id')
+        @Delete(':id')
         async removeGenero(@Param('id') id: string): Promise<RetornoObjDTO>{
             return this.usuarioService.remover(id);
         }    
@@ -68,6 +68,5 @@ export class UsuariosController{
             return this.usuarioService.login(dados.EMAIL,dados.SENHA);
         }    
 
-        }
     // ====================================== //// ====================================== //// ====================================== // 
 }
