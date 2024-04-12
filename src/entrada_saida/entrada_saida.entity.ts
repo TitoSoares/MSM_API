@@ -8,7 +8,7 @@ export class ENTRADA_SAIDA{
     @PrimaryColumn()    
     ID:string;
 
-    @Column({length: 255})
+    @Column()
     TIPO: boolean;
 
     @Column({length: 255})
