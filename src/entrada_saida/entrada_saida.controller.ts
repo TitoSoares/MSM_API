@@ -4,16 +4,18 @@ import {v4  as uuid} from 'uuid'
 import { ApiResponse, ApiResponseProperty, ApiTags } from "@nestjs/swagger";
 import { Entrada_SaidaArmazenados } from "./entrada_saida.dm";
 import { CriaEntrada_SaidaDTO } from "./dto/entrada_saida.dto";
-import { Entrada_SaidaEntity } from "./entrada_saida.entity";
 import { AlteraEntrada_SaidaDTO } from "./dto/atualizaEntrada_Saida.dto";
 import { ListaEntrada_Saida } from "./dto/listaEntrada_Saida.dto";
 import { AlteraFotoEntrada_SaidaDTO } from "./dto/alteraFotoEntrada_Saida.dto";
+import { RetornoCadastroDTO } from "src/dto/retorno.dto";
+import { Entrada_saidaService } from "./entrada_saida.service";
 
 @Controller('/entrada_saida')
 @ApiTags('entrada_saida')
 export class Entrada_saidaController{
 
-    constructor(private claEntrada_SaidaArmazenados:Entrada_SaidaArmazenados){}
+    constructor(private readonly entrada_saidaService: Entrada_saidaService){}
+
 
     // Cria Entrada/Saida
     // ====================================== //// ====================================== //// ====================================== //    
@@ -24,18 +26,10 @@ export class Entrada_saidaController{
 
         @Post()
 
-        async criaEntrada_Saida(@Body() dadosEntrada_Saida:CriaEntrada_SaidaDTO){
-
-            var entrada_saida=new Entrada_SaidaEntity(uuid(),dadosEntrada_Saida.tipo,dadosEntrada_Saida.valor,dadosEntrada_Saida.foto,dadosEntrada_Saida.idusuario)
-
-            this.claEntrada_SaidaArmazenados.AdicionarEntrada_Saida(entrada_saida)
-
-            var retorno={
-                id:entrada_saida.id,
-                message:"Operação feita"
-            }
-            return retorno
+        async criaEntrada_Saida(@Body() dados:CriaEntrada_SaidaDTO): Promise<RetornoCadastroDTO>{        
+            return this.entrada_saidaService.inserir(dados)        
         }
+        
     // ====================================== //// ====================================== //// ====================================== //
 
 
@@ -47,15 +41,8 @@ export class Entrada_saidaController{
     // ====Swagger============================ //
 
     @Put("/:id")
-
-    async atualizaEntrada_Saida(@Param('id') id:string,@Body() novosDados:AlteraEntrada_SaidaDTO){
-
-        const entrada_saidaAtualizado=await this.claEntrada_SaidaArmazenados.atualizaEntrada_Saida(id, novosDados)
-
-        return{
-            usuario:entrada_saidaAtualizado,
-            message:"Operação atulizada"
-        }   
+    async alterarUsuario(@Body() dados: AlteraEntrada_SaidaDTO,@Param('id') id: string): Promise<RetornoCadastroDTO>{        
+        return this.entrada_saidaService.alterar(id,dados)        
     }
     // ====================================== //// ====================================== //// ====================================== //
 

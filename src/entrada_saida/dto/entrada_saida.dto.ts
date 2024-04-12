@@ -24,7 +24,7 @@ export class CriaEntrada_SaidaDTO{
 
     @IsNumber(undefined,{message:"Esse valor de número não é válido"})
     @IsNotEmpty({message:"O campo não pode ser vazio"})
-    valor:Number
+    valor:number
 
  // ====================================== //// ====================================== //// ====================================== // 
     @ApiProperty({

@@ -30,7 +30,4 @@ export class USUARIO{
     @Column({length: 255})
     SENHA: string;
 
-    // @OneToMany(() => ENTRADA_SAIDA, entrada => entrada.usuario)
-    // filmes: FILME[];
-
 }

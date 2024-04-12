@@ -1,35 +1,24 @@
-import { Column, PrimaryColumn } from "typeorm"
+import { USUARIO } from "src/usuarios/usuario.entity";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm"
 
-export class Entrada_SaidaEntity{
-    id:string
-    tipo:boolean
-    valor:Number
-    foto:string
-    idusuario:string
 
-    constructor(id:string, tipo:boolean,valor:Number, foto:string,idusuario:string){
-    this.id=id;
-    this.tipo=tipo;
-    this.valor=valor;
-    this.foto=foto;
-    this.idusuario=idusuario
-    }
-}
+@Entity()
+export class ENTRADA_SAIDA{
 
-// @Entity()
-// export class ENTRADA_SERIE{
+    @PrimaryColumn()    
+    ID:string;
 
-//     @PrimaryColumn()    
-//     ID:string;
+    @Column({length: 255})
+    TIPO: boolean;
 
-//     @Column({length: 255})
-//     TIPO: boolean;
+    @Column({length: 255})
+    VALOR: number;    
 
-//     @Column({length: 255})
-//     VALOR: number;    
+    @Column({length: 255})
+    IDFILES: string
 
-//     @ManyToOne(() => USUARIO, usuario => usuario.entrada_saida)
-//     @JoinColumn({ name: 'IDUSUARIO', referencedColumnName:'ID'})
-//     IDUSUARIO: USUARIO;
+    @ManyToOne(() => ENTRADA_SAIDA)
+    @JoinColumn({ name: 'IDUSUARIO', referencedColumnName:'ID'})
+    IDUSUARIO: USUARIO;
     
-// }
+}
