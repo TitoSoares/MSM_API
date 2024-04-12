@@ -55,6 +55,27 @@ export class Entrada_saidaService {
         });
     }
 
+    async listarEntradaSaida(id: string){
+        var total = await (this.entrada_saidaRepository 
+          .createQueryBuilder('entrada_saida')
+          .select('IDUSUARIO', 'ID')
+          .addSelect('SUM(IF(TIPO, VALOR, VALOR * -1))','TOTAL')   
+          .andWhere('IDUSUARIO = :ID',{ ID: `${id}` })    
+          .addGroupBy('IDUSUARIO')           
+          .getRawOne());
+        var Usuario = await this.usuarioService.localizarID(id);
+    
+        var LISTA = this.entrada_saidaRepository.findOne({
+            where: {
+                IDUSUARIO:Usuario,
+            },
+            });
+        
+        return {Total: total.TOTAL,
+                ListaEntradaSaida: LISTA}
+        
+    }
+
 // ====================================== //// ====================================== //// ====================================== //
 
     async alterar(id: string, dados: AlteraEntrada_SaidaDTO): Promise<RetornoCadastroDTO> {

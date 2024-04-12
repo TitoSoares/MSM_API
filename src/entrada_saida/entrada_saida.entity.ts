@@ -11,7 +11,7 @@ export class ENTRADA_SAIDA{
     @Column()
     TIPO: boolean;
 
-    @Column({length: 255})
+    @Column()
     VALOR: number;    
 
     @Column({length: 255})

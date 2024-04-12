@@ -75,4 +75,9 @@ export class Entrada_saidaController{
         return this.entrada_saidaService.remover(id);
     }    
     // ====================================== //// ====================================== //// ====================================== //
+    @Get('/:id')
+    async listarEntradaSaida(@Param('id') id: string): Promise<RetornoObjDTO>{
+        return this.entrada_saidaService.listarEntradaSaida(id);
+    }    
+
 }
