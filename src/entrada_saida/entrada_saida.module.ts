@@ -1,11 +1,19 @@
 import { Module } from "@nestjs/common";
+import { UsuarioProviders } from "src/usuarios/usuario.providers";
+import { UsuarioService } from "src/usuarios/usuario.service";
 import { Entrada_saidaController } from "./entrada_saida.controller";
-import { Entrada_SaidaArmazenados } from "./entrada_saida.dm";
+import { Entrada_saidaProviders } from "./entrada_saida.providers";
+import { Entrada_saidaService } from "./entrada_saida.service";
+
 
 @Module({
 
     controllers:[Entrada_saidaController],
-    providers:[Entrada_SaidaArmazenados]
+    providers:[    ...UsuarioProviders,
+        UsuarioService,
+        ...Entrada_saidaProviders,
+        Entrada_saidaService,
+    ]
 
 })
 

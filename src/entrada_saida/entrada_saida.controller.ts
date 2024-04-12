@@ -2,7 +2,7 @@ import { Controller, Post } from "@nestjs/common";
 import { Body, Delete, Get, Param, Put } from "@nestjs/common";
 import {v4  as uuid} from 'uuid'
 import { ApiResponse, ApiResponseProperty, ApiTags } from "@nestjs/swagger";
-import { Entrada_SaidaArmazenados } from "./entrada_saida.dm";
+
 import { CriaEntrada_SaidaDTO } from "./dto/entrada_saida.dto";
 import { AlteraEntrada_SaidaDTO } from "./dto/atualizaEntrada_Saida.dto";
 import { ListaEntrada_Saida } from "./dto/listaEntrada_Saida.dto";
