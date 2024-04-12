@@ -7,7 +7,7 @@ import { CriaEntrada_SaidaDTO } from "./dto/entrada_saida.dto";
 import { AlteraEntrada_SaidaDTO } from "./dto/atualizaEntrada_Saida.dto";
 import { ListaEntrada_Saida } from "./dto/listaEntrada_Saida.dto";
 import { AlteraFotoEntrada_SaidaDTO } from "./dto/alteraFotoEntrada_Saida.dto";
-import { RetornoCadastroDTO } from "src/dto/retorno.dto";
+import { RetornoCadastroDTO, RetornoObjDTO } from "src/dto/retorno.dto";
 import { Entrada_saidaService } from "./entrada_saida.service";
 
 @Controller('/entrada_saida')
@@ -55,23 +55,10 @@ export class Entrada_saidaController{
     // ====Swagger============================ //
 
     @Get()
-    
-    async RetornoEntrada_Saida(){
-        
-        const entrada_saidaListados=await this.claEntrada_SaidaArmazenados.Entrada_Saida;
-        
-        const listaRetorno=entrada_saidaListados.map(
-            
-            entrada_saida=> new ListaEntrada_Saida(
-                entrada_saida.id,
-                entrada_saida.tipo,
-                entrada_saida.valor,
-                entrada_saida.foto          
-            )
-        )
-
-        return listaRetorno
+    async RetornoEntrada_Saida():Promise<ListaEntrada_Saida[]> {
+        return this.entrada_saidaService.listar();
     }
+
     // ====================================== //// ====================================== //// ====================================== //
 
 
@@ -84,34 +71,8 @@ export class Entrada_saidaController{
 
     @Delete('/:id')
 
-    async removeEntrada_Saida(@Param("id")id:string){
-        
-        const entrada_saidaRemovido=await this.claEntrada_SaidaArmazenados.removeEntrada_Saida(id)
-        
-        return{
-            usuario:entrada_saidaRemovido,
-            message:"Operação cancelada"
-        }
-    }
-    // ====================================== //// ====================================== //// ====================================== //
-
-
-        // Adiciona Foto (Opcional)
-    // ====================================== //// ====================================== //// ====================================== //
-    // ====Swagger============================ //
-    @ApiResponse({ status: 200, description: 'Retorna que houve sucesso ao trocar a foto.'})
-    @ApiResponse({ status: 500, description: 'Retorna que o usuário não foi encontrado.'})
-    // ====Swagger============================ //
-    
-    @Post('/foto/:id')
-
-    async atualizaFoto(@Param('id') id: string,@Body() AlteraFotoEntrada_Saida: AlteraFotoEntrada_SaidaDTO){
-
-        const entrada_saida = await this.claEntrada_SaidaArmazenados.atualizaEntrada_Saida(id,AlteraFotoEntrada_Saida)
-
-        return{
-            entrada_saida: entrada_saida            
-        }
-    }
+    async removeGenero(@Param('id') id: string): Promise<RetornoObjDTO>{
+        return this.entrada_saidaService.remover(id);
+    }    
     // ====================================== //// ====================================== //// ====================================== //
 }

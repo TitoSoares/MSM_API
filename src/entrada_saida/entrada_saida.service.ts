@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { RetornoCadastroDTO } from "src/dto/retorno.dto";
+import { RetornoCadastroDTO, RetornoObjDTO } from "src/dto/retorno.dto";
 import { USUARIO } from "src/usuarios/usuario.entity";
 import { UsuarioService } from "src/usuarios/usuario.service";
 import { Repository } from "typeorm";
@@ -99,4 +99,24 @@ export class Entrada_saidaService {
             
       }
     
+// ====================================== //// ====================================== //// ====================================== //
+
+async remover(id: string): Promise<RetornoObjDTO> {
+    const entrada_saida = await this.localizarID(id);
+    
+    return this.entrada_saidaRepository.remove(entrada_saida)
+    .then((result) => {
+    return <RetornoObjDTO>{
+        return: entrada_saida,
+        message: "Operação excluida!"
+    };
+    })
+    .catch((error) => {
+    return <RetornoObjDTO>{
+        return: entrada_saida,
+        message: "Houve um erro ao excluir." + error.message
+    };
+    });  
+}
+
 }
