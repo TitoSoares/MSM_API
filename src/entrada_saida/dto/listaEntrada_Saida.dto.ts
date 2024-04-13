@@ -4,6 +4,7 @@ export class ListaEntrada_Saida{
         readonly id:string,
         readonly tipe:boolean,
         readonly valor:Number,
-        readonly foto:string
+        readonly foto:string,
+        
     ){}
-}
+}   

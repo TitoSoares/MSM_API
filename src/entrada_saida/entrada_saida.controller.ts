@@ -9,6 +9,7 @@ import { ListaEntrada_Saida } from "./dto/listaEntrada_Saida.dto";
 import { AlteraFotoEntrada_SaidaDTO } from "./dto/alteraFotoEntrada_Saida.dto";
 import { RetornoCadastroDTO, RetornoObjDTO } from "src/dto/retorno.dto";
 import { Entrada_saidaService } from "./entrada_saida.service";
+import { ListaEntrada_SaidaTOTAL } from "./dto/listaEntrada_SaidaTOTAL.dto";
 
 @Controller('/entrada_saida')
 @ApiTags('entrada_saida')
@@ -76,8 +77,10 @@ export class Entrada_saidaController{
     }    
     // ====================================== //// ====================================== //// ====================================== //
     @Get('/:id')
-    async listarEntradaSaida(@Param('id') id: string): Promise<RetornoObjDTO>{
+    async listarEntradaSaida(@Param('id') id: string): Promise<ListaEntrada_SaidaTOTAL>{
         return this.entrada_saidaService.listarEntradaSaida(id);
     }    
+
+    
 
 }
