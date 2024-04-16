@@ -65,11 +65,13 @@ export class Entrada_saidaService {
           .getRawOne());
         var Usuario = await this.usuarioService.localizarID(id);
     
-        var LISTA = this.entrada_saidaRepository.findOne({
-            where: {
-                IDUSUARIO:Usuario,
-            },
-            });
+        var LISTA = await (this.entrada_saidaRepository 
+            .createQueryBuilder('entrada_saida')
+            .select('ID', 'ID')
+            .addSelect('TIPO', 'TIPO')
+            .addSelect('VALOR', 'VALOR')
+            .andWhere('IDUSUARIO = :ID',{ ID: `${id}` })           
+            .getRawMany());
         
         return {Total: total.TOTAL,
                 ListaEntradaSaida: LISTA}
